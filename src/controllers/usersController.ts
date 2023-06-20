@@ -1,19 +1,11 @@
 import userService from '../services/userService';
+import { User } from '../models/userModel';
+import { UserResponse } from '../models/userModel'; // Add this import
+import { mapUserResponse } from '../utils/userMapper';
 
-const usersController = {
-  getAllUsers: async () => {
+export class UsersController {
+  public static async getAllUsers(): Promise<UserResponse[]> {
     const users = await userService.getAllUsers();
-    return users.map((user: any) => ({
-      id: user.id,
-      prefix: '',
-      firstName: user.name.split(' ')[0],
-      lastName: user.name.split(' ')[1],
-      email: user.email,
-      address: `${user.address.street} ${user.address.suite} ${user.address.city} ${user.address.zipcode}`,
-      geolocation: `(${user.address.geo.lat}, ${user.address.geo.lng})`,
-      companyName: user.company.name,
-    }));
-  },
-};
-
-export default usersController;
+    return users.map((user: User) => mapUserResponse(user));
+  }
+}

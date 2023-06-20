@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import usersController from '../controllers/usersController';
+import { UsersController } from '../controllers/usersController';
 
 const usersHandler = {
   getAllUsers: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const users = await usersController.getAllUsers();
+      const users = await UsersController.getAllUsers();
       res.json(users);
     } catch (error) {
       console.error('Error retrieving user data:', error);

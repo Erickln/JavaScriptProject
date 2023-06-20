@@ -1,8 +1,8 @@
-import userModel from '../models/userModel';
+import { userModel, User } from '../models/userModel';
 
 const userService = {
-  getAllUsers: async () => {
-    const users = await userModel.find();
+  getAllUsers: async (): Promise<User[]> => {
+    const users = await userModel.find().lean();
     return users;
   },
 };
