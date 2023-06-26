@@ -1,10 +1,11 @@
-import { userModel, User } from '../models/userModel';
+import { MongoClient, Collection } from 'mongodb';
 
-const userService = {
-  getAllUsers: async (): Promise<User[]> => {
-    const users = await userModel.find().lean();
-    return users;
-  },
-};
+export class UserService {
+  private collection: Collection;
 
-export default userService;
+  constructor(collection: Collection) {
+    this.collection = collection;
+  }
+
+  // Implement additional user-related methods or operations using the MongoDB collection
+}
